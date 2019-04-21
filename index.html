@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Rimorsoft vuejs v2</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="main">
+		<h2>VUEJS V2</h2>
+		<ul>
+			<li v-for="person in people" v-text="person"></li>
+		</ul>
+		<input type="text" v-model="name" @keyup.enter="addName" placeholder="Nombre">
+	</div>
+	<script src="js/vue.js"></script>
+	<script>
+		new Vue({
+			el: '#main',
+			data: {
+				name: '',
+				people:[
+					'maria',
+					'kamila',
+					'alyerick',
+					'betania'
+				]
+			},
+			methods:{
+				addName(){
+					this.people.push(this.name);
+					this.name = '';
+				}
+			}
+		});
+	</script>
+</body>
+</html>
