@@ -12,7 +12,9 @@
 				<h2 class="text-center col-md-12">VUEJS V2</h2>
 				<div class="col-md-4 pull-left">
 					<h4 class="text-center">DATA</h4>
-					{{$data}}
+					<ul>
+						<li v-for="list in lists" v-text="list"></li>
+					</ul>
 				</div>
 				<div class="col-md-8 pull-right">
 					<h4 class="text-center">LISTA - JSON</h4>
