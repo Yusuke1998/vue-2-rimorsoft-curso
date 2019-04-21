@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Rimorsoft vuejs v2</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+	<div id="main">
+		<div class="container">
+			<div class="row">
+				<h2 class="text-center col-md-12">VUEJS V2</h2>
+				<div class="col-md-4 pull-left">
+					<h4 class="text-center">DATA</h4>
+					{{$data}}
+				</div>
+				<div class="col-md-8 pull-right">
+					<h4 class="text-center">LISTA - JSON</h4>
+					{{$data | json}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-resource.min.js"></script>
+	<script src="js/axios.min.js"></script>
+	<script>
+		var url = 'http://localhost:8080/usuarios';
+		new Vue({
+			el: '#main',
+			created: function(){
+			},
+			data: {
+				lists: []
+			},
+			methods:{
+				getUsers:function(){
+	                axios.get(url).then(response=>{
+	                    this.lists = response.data;
+	                })
+	                .catch(error=>{
+	                	console.log(error);
+	                }); 
+				}
+			},
+			mounted: function(){
+				this.getUsers();
+			}
+		});
+	</script>
+</body>
+</html>
