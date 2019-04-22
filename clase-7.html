@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Rimorsoft vuejs v2</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+	<div id="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="text-center">VUEJS V2</h2>
+				</div>
+				<div class="col-sm-4">
+					<h1>Filtros</h1>
+					<button type="button" class="btn btn-primary" @click="getUsers" v-if="!lists.length" >Listar</button>
+					<ul class="list-group" v-else>
+						<li class="list-group-item">
+							<input type="text" class="form-control" v-model="name" placeholder="Buscar">
+						</li>
+						<li class="list-group-item" v-for="item in searchUser" v-text="item"></li>
+					</ul>
+				</div>
+				<div class="col-sm-8">
+					<h1>JSON</h1>
+					<pre>
+						{{ $data }}
+					</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#main',
+			data: {
+				name:'',
+				lists:[]
+			},
+			methods:{
+				getUsers:function(){
+					var url = 'http://localhost:8000/usuarios';
+					axios.get(url).then(response=>{
+						console.log(response.data);
+						this.lists = response.data;
+					});
+				}
+			},
+			computed:{
+				searchUser: function(){
+					return this.lists.filter((item) => item.name.includes(this.name));
+				}
+			}
+		});
+	</script>
+</body>
+</html>
